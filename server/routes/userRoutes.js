@@ -1,9 +1,9 @@
 import express from 'express'
-import userModel from '../models/userModel.js';
+import { register,login } from '../controllers/userController.js';
 const router = express.Router();
+
+router.post('/register' ,register);
+
+router.post('/login' ,login);
  
-router.get('/' , (req ,res) => {
-    res.json(userModel);
-});
- 
-export default router 
+export default router;

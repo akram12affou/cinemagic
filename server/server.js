@@ -2,14 +2,18 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connect } from './config/db.js';
 import router from './routes/userRoutes.js';
+import { notFound,errorHandler } from './middleware/errorMiddleware.js';
+
 const PORT = process.env.PORT || 8888;
 const app = express();
-
+app.use(express.json())
 dotenv.config();
+app.use('/auth' ,router)
 connect();
 
-app.use('/user' ,router);
-
 app.listen(PORT , (req,res) => {
-    console.log('hey from ' , PORT);
+    console.log('hey from ' , PORT); 
 });
+
+app.use(notFound);
+app.use(errorHandler);
