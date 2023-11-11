@@ -51,9 +51,9 @@ body, body * {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
     .header_gap{
-        gap:15vw
+        gap:2vw
     }
     .img{
         width: calc(100px + 10vw);
@@ -63,5 +63,7 @@ body, body * {
         width: calc(50px + 10vw);
         height: calc((50px + 10vw)*1.5);
      }
-     
+     .header_height{
+        height: fit-content;
+     }
   }

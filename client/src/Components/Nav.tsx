@@ -11,12 +11,12 @@ function Nav({query,setQuery}) {
     navigate('/')
   }
   return (
-    <div className="bg_color flex header_height justify-center items-center">
-      <div className="flex header_gap sm:w-10/12 w-11/12 justify-evenly items-center">
-        <div className="font-bold text-white tracking-wider sm:text-2xl text-xl cursor-pointer" onClick={navigateToHome}>CINEMAGIC</div>
+    <div className="bg_color flex  justify-center items-center overflow-hidden header_height p-2 sm:p-0">
+      <div className="flex gap-5 header_gap  flex-col sm:flex-row sm:w-10/12 w-11/12 justify-evenly sm:items-center items-start">
+        <div className="font-bold text-white tracking-wider text-2xl cursor-pointer" onClick={navigateToHome}>CINEMAGIC</div>
         <div className="flex align-items gap-4">
           <input type="text" placeholder="search a movie" value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-64" />
-          <button className="text-white uppercase tracking-wider text-base" onClick={() => navigate('/auth')}>Login</button>
+          <button className="text-white font-semibold uppercase tracking-wider  sm:text-base text-sm" onClick={() => navigate('/auth')}>Login</button>
         </div>
       </div>
     </div>
