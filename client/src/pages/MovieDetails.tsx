@@ -90,8 +90,8 @@ function MovieDetails() {
                  <span className='text-sm'>Duration:</span>
                 <span className='text-sm sm:text-base'>{runtime} mn</span>
             </div>
-            <div className='flex flex-col flex-wrap w-1/4 sm:hidden text-white'>
-                <div className='flex flex-wrap gap-2'>
+            <div className='flex flex-col flex-wrap w-1/4 sm:hidden text-white justify-center'>
+                <div className='flex flex-wrap  gap-2 mx-auto'>
                     {data.genres?.map((e) => {
                 return(
                     <div className='p-1 bg-lime-600 rounded-md text-xs sm:text-base font-semibold tracking-wide'>{e.name}</div>

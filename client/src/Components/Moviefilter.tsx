@@ -11,7 +11,8 @@ function Moviefilter({setAlignment ,alignment }) {
   return (
     <div className="flex justify-end  relative  top-5 p-0">
      <ToggleButtonGroup
-      style={{ border:'1px solid white' , scale:'0.8', display:'flex', justifyContent:'flex-end' }}
+     className='scale-75 sm:scale-90'
+      style={{ border:'1px solid white' , display:'flex', justifyContent:'flex-end' }}
       value={alignment}
       exclusive
       onChange={handleChange}

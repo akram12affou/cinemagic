@@ -23,6 +23,7 @@ function Auth() {
             }
           ).then(res => {
             setCookie('accestoken', res.data.token)
+            window.localStorage.setItem('cinemagicUser',res.data.newUser)
             navigate('/')
           })
         }else{
@@ -33,6 +34,7 @@ function Auth() {
           }
         ).then(res => {
           setCookie('accestoken', res.data.token)
+          window.localStorage.setItem('cinemagicUser',res.data.newUser)
           navigate('/')
         })
         }
