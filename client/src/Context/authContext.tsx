@@ -4,7 +4,7 @@ const initialState :  {
   loading: boolean;
   error: null;
 } = {
-     user:  null ,
+     user: JSON.parse(window.localStorage.getItem('cinemagicUser')) ||  null ,
      loading:false, 
      error:null 
 };
@@ -20,12 +20,14 @@ const AuthReducer = (state : any, action: { type: string; payload: any; }) => {
             user : null
         };
       case "LOGIN_SUCCESS":
+        
         return {
             loading : false,
             error : null,
             user : action.payload
         };
       case "LOGIN_FAILED":
+        console.log(action.payload)
         return {
             loading : false,
             error : action.payload,
@@ -45,12 +47,13 @@ const AuthReducer = (state : any, action: { type: string; payload: any; }) => {
 export const AuthContextProvider = ({children } : any) => {
 
  const [state , dispatch] = useReducer(AuthReducer,initialState);
-//  useEffect(() => {
-//   dispatch({type:'LOGIN_SUCCESS' , payload:JSON.parse()})
-//  },[])
+ useEffect(() => {
+  dispatch({type:'LOGIN_SUCCESS' , payload:JSON.parse(window.localStorage.getItem('cinemagicUser'))})
+ },[])
  useEffect(() => {
  window.localStorage.setItem('cinemagicUser' , JSON.stringify(state.user))
  },[state.user])
+
     const value :{ user: any; loading: boolean; error: null; dispatch :React.Dispatch<{
       type: string;
       payload: any;

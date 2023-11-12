@@ -6,41 +6,44 @@ import PersonDetails from "./pages/PersonDetails";
 import Auth from "./pages/Auth";
 import { useEffect, useState } from "react";
 import SearchMovies from "./pages/SearchMovies";
-
+import WatchList from "./pages/WatchList";
+import { AuthContextProvider } from "./Context/authContext";
 function App() {
-  
-  const [ query , setQuery ] = useState('')
-  const [show , setShow] = useState(false)
-  useEffect(()=> {
-    if(query=='') {
-      setShow(false) 
+  const [query, setQuery] = useState("");
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (query == "") {
+      setShow(false);
       return;
     }
-    
-      setShow(true)
-  },[query])
+
+    setShow(true);
+  }, [query]);
   return (
-    <Router>
-        <Nav query={query} setQuery={setQuery}/>
-        <Routes>
-          {
-            !show ?
-            <><Route path='/' element={<Home/>}></Route>
-          <Route path='/movie/:id' element={<MovieDetails/>}></Route>
-          <Route path='/person/:id' element={<PersonDetails/>}></Route>
-          <Route path='/auth' element={<Auth/>}></Route>
+    <AuthContextProvider>
+         <Router>
+      <Nav query={query} setQuery={setQuery} />
+      <Routes>
+        {!show ? (
+          <>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/movie/:id" element={<MovieDetails />}></Route>
+            <Route path="/person/:id" element={<PersonDetails />}></Route>
+            <Route path="/auth" element={<Auth />}></Route>
+            <Route path="/watchList" element={<WatchList/>}></Route>
           </>
-            :
-            <Route path='/' element={<SearchMovies query={query}  setQuery={setQuery} />}></Route>
-           
-            
-          }
-          
-        </Routes>
-      </Router> 
-           
+        ) : (
+          <Route
+            path="/"
+            element={<SearchMovies query={query} setQuery={setQuery} />}
+          ></Route>
+        )}
+      </Routes>
+    </Router>
+    </AuthContextProvider>
     
-  )
+ 
+  );
 }
 
-export default App
+export default App;

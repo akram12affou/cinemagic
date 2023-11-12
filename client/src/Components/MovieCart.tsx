@@ -2,8 +2,12 @@ import {FiStar} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
 import {SiThemoviedatabase} from 'react-icons/si'
 import {Link} from 'react-router-dom'
+import { useCookies } from 'react-cookie';
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 function MovieCart({movie , setQuery}) {
     const navigate = useNavigate();
+    const [cookie , setCookie , removeCookie] =useCookies(['accestoken']);
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg-gray-500" : " bg-lime-500";
     const navigatetoMovie = () => {
@@ -11,7 +15,25 @@ function MovieCart({movie , setQuery}) {
       navigate(`/movie/${id}`)
       setQuery('')
     }
-    
+  const addToFavorite = () => {
+    if(cookie.accestoken){
+     
+    }else{
+        navigate('/auth');
+        scrollTo(0,0);
+        Toastify({
+          text: "login to Add to your watch List",
+          className: "info",
+          style: {
+            background: "linear-gradient(to right, #ff8888, #454545)",
+          },
+          offset: {
+            x:10, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+            y: 660 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+          },
+        }).showToast();
+    }
+  }
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">
@@ -31,7 +53,7 @@ function MovieCart({movie , setQuery}) {
              <span className=' text-white text-sm sm:text-base hover:tracking-wide cursor-pointer trans '>
                     {title.substring(0,10)}
                 </span>
-                <div>
+                <div onClick={addToFavorite}>
                   <FiStar className='text-white text-xl cursor-pointer'/>  
                 </div>
         </div>      

@@ -8,7 +8,7 @@ export const  register = asyncHandler( async (req ,res) => {
     const {username , password , email} = req.body;
     const passwordhashed = await bcrypt.hash(password ,10);
     const user = await userModel.findOne({ $or: [{ username }, { email }] });
-    if(user){ 
+    if(user){  
      responce(res,'user already exist' ,400);
     }else{
      const newUser = await userModel.create({username , password :passwordhashed, email});
@@ -24,7 +24,7 @@ export const login = asyncHandler(async (req,res) => {
     if(user){
         const matchedPassword = await bcrypt.compare(password,user.password);
         if(matchedPassword){
-            const token = generateToken(res,user._id);
+            const token = await generateToken(res,user._id);
             res.json({user , token});
         }else{
             responce(res,'wrong credentials',403);
