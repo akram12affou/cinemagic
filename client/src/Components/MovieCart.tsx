@@ -1,4 +1,5 @@
 import {FiStar} from 'react-icons/fi';
+import {FaStar} from 'react-icons/fa'
 import {useNavigate} from 'react-router-dom';
 import {SiThemoviedatabase} from 'react-icons/si'
 import {Link} from 'react-router-dom'
@@ -9,8 +10,10 @@ import "toastify-js/src/toastify.css"
 function MovieCart({movie , setQuery}) {
     const navigate = useNavigate();
     const [cookie ,_] =useCookies(['accestoken']);
+
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg-gray-500" : " bg-lime-500";
+
     const navigatetoMovie = () => {
       scrollTo(0,0);
       navigate(`/movie/${id}`);
@@ -24,7 +27,7 @@ function MovieCart({movie , setQuery}) {
          },{headers: { token : cookie?.accestoken }}
          ).then(res => {
           console.log(res.data);
-         })
+         });
     }else{
         navigate('/auth');
         scrollTo(0,0);
@@ -42,7 +45,16 @@ function MovieCart({movie , setQuery}) {
         }).showToast();
     }
   }
-
+  const vote = () => {
+    const voteN = +vote_average
+    return voteN.toFixed(2)
+  }
+  const removeFromFavorite = (movie) => {
+     axios.delete(`http://localhost:8888/movie/remove/${movie._id}` , {headers: { token : cookie?.accestoken }}
+     ).then(res => {
+      console.log(res.data)
+     })
+  }
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">
@@ -56,14 +68,15 @@ function MovieCart({movie , setQuery}) {
         </div>
          
           
-           {/* <span className={"absolute text-white top-2  text-base p-1 rounded-r-lg" + bg_color}>{+vote_average.toFixed(2)}</span> */}
+           <span className={"absolute text-white top-2  text-base p-1 rounded-r-lg" + bg_color}>{vote()}</span>
         </div>
         <div className='flex items-center w-full justify-evenly  gap-3'>
              <span className=' text-white text-sm sm:text-base hover:tracking-wide cursor-pointer trans '>
                     {title.substring(0,10)}
                 </span>
-                <div onClick={addToFavorite}>
-                  <FiStar className='text-white text-xl cursor-pointer'/>  
+                <div>
+                   
+                  {movie.userId ? <FaStar className='text-white text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-xl cursor-pointer active:scale-105'/> }
                 </div>
         </div>      
     </div>

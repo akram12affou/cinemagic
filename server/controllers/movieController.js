@@ -17,3 +17,10 @@ export const addMovie = async (req, res) => {
          res.json(error);
     }
 };
+
+export const removeMovie = async (req,res) => {
+    const {id} = req.params
+    // res.json({id , userId : req.user._id})
+    await movieModel.findOneAndDelete({id });
+    
+}

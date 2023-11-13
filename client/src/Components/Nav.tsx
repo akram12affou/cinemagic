@@ -39,8 +39,8 @@ function Nav({query,setQuery}) {
           <input type="text" placeholder="search a movie ..." value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-1/2" />
           {cookie?.accestoken ?  
                 <div className='sm:flex items-center gap-4'>
-                <div className='flex items-center text-white gap-3 '>
-                  <div className=' border border-slate-200 flex  items-center gap-2 p-1 rounded-md'>
+                <div className='flex items-center text-white  gap-3 '>
+                  <div className=' border border-slate-200 flex  bg-white text-black items-center gap-2 p-1 rounded-md'>
                      <span>
                     <BiUserCircle className="text-xl"/>
                   </span>
