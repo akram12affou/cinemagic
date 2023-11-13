@@ -47,7 +47,6 @@ function Nav({query,setQuery}) {
                  {user?.username}
                 </span>
                   </div>
-                 
                  <div>
                   <button className='uppercase font-semibold tracking-wide' onClick={navigateToWatchList}><BsFillBookmarksFill className="text-xl"/></button>
                 </div>
@@ -55,7 +54,6 @@ function Nav({query,setQuery}) {
                 <div className='flex justify-center'>
                             <button className="text-white font-semibold uppercase tracking-wider  sm:text-base text-sm flex justify-center" onClick={Logout}>Logout</button>
                 </div>
-               
                </div>
            :        
            

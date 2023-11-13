@@ -16,7 +16,6 @@ function App() {
       setShow(false);
       return;
     }
-
     setShow(true);
   }, [query]);
   return (

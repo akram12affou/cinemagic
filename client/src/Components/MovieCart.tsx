@@ -2,22 +2,28 @@ import {FiStar} from 'react-icons/fi';
 import {useNavigate} from 'react-router-dom';
 import {SiThemoviedatabase} from 'react-icons/si'
 import {Link} from 'react-router-dom'
+import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import Toastify from 'toastify-js'
+import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css"
 function MovieCart({movie , setQuery}) {
     const navigate = useNavigate();
-    const [cookie , setCookie , removeCookie] =useCookies(['accestoken']);
+    const [cookie ,_] =useCookies(['accestoken']);
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg-gray-500" : " bg-lime-500";
     const navigatetoMovie = () => {
-      scrollTo(0,0)
-      navigate(`/movie/${id}`)
-      setQuery('')
-    }
-  const addToFavorite = () => {
+      scrollTo(0,0);
+      navigate(`/movie/${id}`);
+      setQuery('');
+    };
+    
+    const addToFavorite = () => {
     if(cookie.accestoken){
-     
+         axios.post('http://localhost:8888/movie/add',{
+         title,poster_path,vote_average, userId:'hey'
+         }).then(res => {
+          console.log(res)
+         })
     }else{
         navigate('/auth');
         scrollTo(0,0);
@@ -27,13 +33,15 @@ function MovieCart({movie , setQuery}) {
           style: {
             background: "linear-gradient(to right, #ff8888, #454545)",
           },
+          duration: 3000,
           offset: {
-            x:10, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: 660 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            x:10,
+            y: 660 
           },
         }).showToast();
     }
   }
+
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">

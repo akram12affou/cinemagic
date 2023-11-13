@@ -1,11 +1,12 @@
 import {BsFillPersonPlusFill} from 'react-icons/bs';
 import axios from 'axios';
-import  {BiUserCircle} from 'react-icons/bi';
+import  {BiUserCircle} from 'react-icons/Bi';
 import {MdOutlinePassword,MdOutlineAlternateEmail} from 'react-icons/md';
 import { useState,useContext } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/authContext';
+
 function Auth() {
     const navigate = useNavigate()
     const [_, setCookie] = useCookies(['accestoken']);
@@ -13,7 +14,8 @@ function Auth() {
     const [password , setPassword]= useState('');
     const [email , setEmail]= useState('');
     const [name , setName]= useState('');
-    const {loading , user , error, dispatch} = useContext(AuthContext)
+    const {loading , user , error, dispatch} = useContext(AuthContext);
+
     const authFunc = () => {
       dispatch({type:'LOGIN_START'})
         if(register){
@@ -46,7 +48,8 @@ function Auth() {
           dispatch({type:"LOGIN_FAILED",payload :  err.response.data.message})
         })
         }
-    }
+    };
+
   return (
     <div className='min-h-screen second_bg_color text-white'>
         <div className='flex rounded-sm flex-col items-center top-16 relative gap-6   mx-auto p-5  '>
@@ -72,9 +75,8 @@ function Auth() {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}  className='p-2 outline-none text-black form_width ' placeholder='Password'/>     
                 </div>
             </div>
-            {loading && <>loading ...</> }
             {error}
-            <button className='bg-white text-black p-1 rounded-sm tracking-wide font-semibold hover:tracking-wider trans' onClick={authFunc}>{!register ? <>Log In </>:<div className='flex items-center gap-1'>Sign Up <BsFillPersonPlusFill/> </div> }</button>
+            <button className={`bg-white  text-black p-1 rounded-sm tracking-wide font-semibold hover:tracking-wider trans ${loading && 'opacity-70'}`}   onClick={authFunc}>{!register ? <>Log In {loading && <>...</>} </>:<div className='flex items-center gap-1'>Sign Up <BsFillPersonPlusFill/> {loading && <>...</>}</div> }</button>
             <div className='flex gap-1'>
                 {
                     register ? 
