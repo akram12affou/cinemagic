@@ -1,4 +1,4 @@
-import movieModel from "../models/movieModel.js"
+import movieModel from "../models/movieModel.js" 
 
 export const getMovies = async  (req, res) => {
     const movies = await movieModel.find()
@@ -7,9 +7,15 @@ export const getMovies = async  (req, res) => {
 
 export const addMovie = async  (req, res) => {
     //userId mn lmiddleware
-    const {title,poster_path,vote_average} = req.body;
+    try {
+      const {id,title,poster_path,vote_average} = req.body;
     const newMovie = await movieModel.create({
-        title,poster_path,vote_average
+        title,poster_path,vote_average,id
     });
-    res.json(newMovie);
+    newMovie.save();
+    res.json(newMovie);  
+    } catch (error) {
+         res.json(error);
+    }
+    
 };

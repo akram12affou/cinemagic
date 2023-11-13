@@ -20,7 +20,7 @@ function MovieCart({movie , setQuery}) {
     const addToFavorite = () => {
     if(cookie.accestoken){
          axios.post('http://localhost:8888/movie/add',{
-         title,poster_path,vote_average, userId:'hey'
+         title,poster_path,vote_average, id
          }).then(res => {
           console.log(res)
          })
