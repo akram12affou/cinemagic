@@ -9,7 +9,8 @@ function Moviefilter({setAlignment ,alignment }) {
       setAlignment(newAlignment);
     };
   return (
-    <div className="flex justify-end  relative  top-5 p-0">
+    <div className='flex justify-center'>
+        <div className="flex justify-end  sm:w-10/12 w-11/12 mr-0	 relative  top-5 ">
      <ToggleButtonGroup
      className='scale-75 sm:scale-90'
       style={{ border:'1px solid white' , display:'flex', justifyContent:'flex-end' }}
@@ -24,6 +25,8 @@ function Moviefilter({setAlignment ,alignment }) {
     </ToggleButtonGroup>
        
     </div>
+    </div>
+  
   )
 }
 

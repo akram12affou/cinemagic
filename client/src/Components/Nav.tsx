@@ -29,6 +29,7 @@ function Nav({query,setQuery}) {
   const Logout = () => {
     dispatch({type:'LOGOUT'});
     removeCookie('accestoken');
+    navigate('/');
   }
   return (
     <div className="bg_color flex  justify-center items-center overflow-hidden header_height p-2 sm:p-0">

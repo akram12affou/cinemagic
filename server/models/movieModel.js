@@ -19,7 +19,7 @@ const movieSchema = Schema({
     },
     userId:{
         type:Types.ObjectId,
-        required:false
+        required:true
     }
 });
 

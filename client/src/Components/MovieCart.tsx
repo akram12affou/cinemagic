@@ -21,8 +21,9 @@ function MovieCart({movie , setQuery}) {
     if(cookie.accestoken){
          axios.post('http://localhost:8888/movie/add',{
          title,poster_path,vote_average, id
-         }).then(res => {
-          console.log(res)
+         },{headers: { token : cookie?.accestoken }}
+         ).then(res => {
+          console.log(res.data);
          })
     }else{
         navigate('/auth');
@@ -55,7 +56,7 @@ function MovieCart({movie , setQuery}) {
         </div>
          
           
-           <span className={"absolute text-white top-2  text-base p-1 rounded-r-lg" + bg_color}>{vote_average.toFixed(2)}</span>
+           {/* <span className={"absolute text-white top-2  text-base p-1 rounded-r-lg" + bg_color}>{+vote_average.toFixed(2)}</span> */}
         </div>
         <div className='flex items-center w-full justify-evenly  gap-3'>
              <span className=' text-white text-sm sm:text-base hover:tracking-wide cursor-pointer trans '>
