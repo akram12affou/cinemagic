@@ -10,6 +10,7 @@ function Home() {
     const {data , loading} = useFetch(`https://api.themoviedb.org/3/movie/${alignment}?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}&language=en-US}`,alignment)
   return (
     <div className='second_bg_color min-h-screen'>
+      {JSON.stringify(watchedList)}
      <div className='sm:w-10/12 w-11/12 mx-auto'>
         <Moviefilter alignment={alignment} setAlignment={setAlignment} />
         <br />
@@ -23,10 +24,10 @@ function Home() {
                   :
                   <>
                   {data?.results?.map((movie)=> {
-            return(
-              <MovieCart  movie={movie} watchedList={watchedList}/>
-            )
-                  })}  
+                  return(
+                     <MovieCart  movie={movie} watchedList={watchedList}/>
+                  )
+                  })}
                   </>
                 }
             </div>

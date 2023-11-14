@@ -26,6 +26,9 @@ function MovieCart({movie , setQuery}) {
     
     const addToFavorite = () => {
     if(cookie.accestoken){
+      dispatch({type:'ADD_TO_WATCHEDLIST' , payload:{
+        title,poster_path,vote_average, id
+        }})
          axios.post('http://localhost:8888/movie/add',{
          title,poster_path,vote_average, id
          },{headers: { token : cookie?.accestoken }}
@@ -56,12 +59,20 @@ function MovieCart({movie , setQuery}) {
   }
 
   const removeFromFavorite = (movie) => {
-     axios.delete(`http://localhost:8888/movie/remove/${movie._id}` , {headers: { token : cookie?.accestoken }}
+     axios.delete(`http://localhost:8888/movie/remove/${movie.id}` , {headers: { token : cookie?.accestoken }}
      ).then(res => {
       console.log(res.data)
      })
   }
-
+ const InFavorite = (id) => {
+  let exist = false
+  for(let i =0 ; watchedList.length > i ; i++){
+    if(+watchedList[i].id == id ){
+      exist = true
+    }
+  }
+   return exist
+ }
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">
@@ -82,8 +93,8 @@ function MovieCart({movie , setQuery}) {
                     {title.substring(0,10)}
                 </span>
                 <div>
-                   {JSON.stringify(watchedList)}
-                  {movie.userId ? <FaStar className='text-white text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-xl cursor-pointer active:scale-105'/> }
+                
+                  {InFavorite(movie.id) ? <FaStar className='text-white text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-xl cursor-pointer active:scale-105'/> }
                 </div>
         </div>      
     </div>

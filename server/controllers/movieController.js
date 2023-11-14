@@ -21,6 +21,6 @@ export const addMovie = async (req, res) => {
 export const removeMovie = async (req,res) => {
     const {id} = req.params;
     res.json({id , userId : req.user._id})
-    await movieModel.findOneAndDelete({_id:id ,  userId : req.user._id});
+    await movieModel.findOneAndDelete({id:id ,  userId : req.user._id});
      
 }

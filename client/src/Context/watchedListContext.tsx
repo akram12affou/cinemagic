@@ -15,15 +15,17 @@ export const WatchedListContext = createContext(initialState);
 const WatchedListReducer = (state : any, action: { type: string; payload: any; }) => {
     switch (action.type) {
       case "FETCH_WATCHEDLIST":
-        console.log(action.payload);
            return {
                 watchedList : action.payload
             }
       case "ADD_TO_WATCHEDLIST":
         return {
-          watchedList : []
+          watchedList : [...state.watchedList , action.payload]
         };
       case "REMOVE_FROM_WATCHEDLIST":
+        console.log(state.watchedList.filter((e) => {
+          return e.id = action.payload
+        }))
         return {
             watchedList : []
         };
@@ -48,7 +50,6 @@ export const WatchedListContextProvider = ({children } : any) => {
         watchedList : state.watchedList,
         dispatch
     }  
-
     return  <WatchedListContext.Provider value={value}>
               {children}
             </WatchedListContext.Provider>
