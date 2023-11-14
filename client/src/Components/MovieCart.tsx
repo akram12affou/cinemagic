@@ -7,7 +7,11 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css"
+import { useContext } from 'react';
+import { WatchedListContext } from '../Context/watchedListContext';
 function MovieCart({movie , setQuery}) {
+  const {dispatch , watchedList} = useContext(WatchedListContext)
+
     const navigate = useNavigate();
     const [cookie ,_] =useCookies(['accestoken']);
 
@@ -45,16 +49,19 @@ function MovieCart({movie , setQuery}) {
         }).showToast();
     }
   }
+
   const vote = () => {
     const voteN = +vote_average
     return voteN.toFixed(2)
   }
+
   const removeFromFavorite = (movie) => {
      axios.delete(`http://localhost:8888/movie/remove/${movie._id}` , {headers: { token : cookie?.accestoken }}
      ).then(res => {
       console.log(res.data)
      })
   }
+
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">
@@ -75,7 +82,7 @@ function MovieCart({movie , setQuery}) {
                     {title.substring(0,10)}
                 </span>
                 <div>
-                   
+                   {JSON.stringify(watchedList)}
                   {movie.userId ? <FaStar className='text-white text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-xl cursor-pointer active:scale-105'/> }
                 </div>
         </div>      

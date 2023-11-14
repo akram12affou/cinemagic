@@ -2,8 +2,10 @@ import MovieCart from '../Components/MovieCart';
 import Moviefilter from '../Components/Moviefilter'
 import { useFetch } from '../hooks/useFetch'
 import LoadingComp from '../Components/loading/loadingComp';
-import { useState} from 'react'
+import { useContext, useState} from 'react'
+import { WatchedListContext } from '../Context/watchedListContext';
 function Home() {
+    const {dispatch , watchedList} = useContext(WatchedListContext);
     const [alignment, setAlignment] = useState('popular');
     const {data , loading} = useFetch(`https://api.themoviedb.org/3/movie/${alignment}?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}&language=en-US}`,alignment)
   return (
@@ -22,7 +24,7 @@ function Home() {
                   <>
                   {data?.results?.map((movie)=> {
             return(
-              <MovieCart  movie={movie}/>
+              <MovieCart  movie={movie} watchedList={watchedList}/>
             )
                   })}  
                   </>
