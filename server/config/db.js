@@ -5,7 +5,7 @@ const connect = () => {
         console.log('connected succefully')
     }).catch((err) => {
         console.log('mongoose error' , err)
-    })
+    }) 
 };
 
 export {connect};

@@ -23,12 +23,15 @@ const WatchedListReducer = (state : any, action: { type: string; payload: any; }
           watchedList : [...state.watchedList , action.payload]
         };
       case "REMOVE_FROM_WATCHEDLIST":
-        console.log(state.watchedList.filter((e) => {
-          return e.id = action.payload
-        }))
         return {
-            watchedList : []
+            watchedList : state.watchedList.filter((e) => {
+              return e.id !== action.payload
+            })
         };
+      case "DELETE_ALL_WATCHED_LIST":
+        return{
+            watchedList : [],
+        }
       default:
         return state;
     }
@@ -36,19 +39,19 @@ const WatchedListReducer = (state : any, action: { type: string; payload: any; }
 
 export const WatchedListContextProvider = ({children } : any) => {
  const [cookie , setCookie , removeCookie] = useCookies(['accestoken']);
- const [state , dispatch] = useReducer(WatchedListReducer,initialState);
+ const [state , dispatchl] = useReducer(WatchedListReducer,initialState);
  useEffect(() => {
     axios.get('http://localhost:8888/movie' , 
      {headers: { token : cookie?.accestoken }}
    ).then(res => {
-     dispatch({type:'FETCH_WATCHEDLIST' , payload:res.data});
+     dispatchl({type:'FETCH_WATCHEDLIST' , payload:res.data});
     }).catch(err => {
      console.log(err)
     });
  },[]);
     const value= {
         watchedList : state.watchedList,
-        dispatch
+        dispatchl
     }  
     return  <WatchedListContext.Provider value={value}>
               {children}

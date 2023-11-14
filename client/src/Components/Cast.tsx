@@ -7,7 +7,7 @@ function Cast({ id,personNumber,setPersonNumber }) {
       {data?.cast?.length !== 0 && 
        <>
            <div className='sm:w-8/12 w-9/12 flex mx-auto justify-between text-white mt-8 sm:mt-5'>
-        <h2 className='font-semibold sm:text-2xl text-xl underline decoration-1 '>
+        <h2 className='font-semibold sm:text-2xl text-xl  decoration-1 '>
             Top Billed Cast
         </h2>
         <button className={!personNumber ? `border border-white rounded-md px-2 py-1 hover:scale-105 trans bg-white text-black` : `border border-white rounded-md px-2 py-1 hover:scale-105 trans`} onClick={() =>  setPersonNumber(prev => !prev)}>

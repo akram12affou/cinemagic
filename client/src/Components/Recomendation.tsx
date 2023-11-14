@@ -13,7 +13,7 @@ function Recomendation({ id }) {
       {data?.results?.length !== 0 && (
         <div className="flex flex-col mx-auto justify-between text-white mt-8  gap-3 ">
           <div className="sm:w-8/12 w-9/12 flex mx-auto ">
-            <h2 className="font-semibold sm:text-2xl text-xl underline decoration-1 text-white">
+            <h2 className="font-semibold sm:text-2xl text-xl  decoration-1 text-white">
               Recommendations
             </h2>
             <div></div>

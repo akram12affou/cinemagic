@@ -4,9 +4,11 @@ import { BiUserCircle } from 'react-icons/Bi';
 import {useContext} from 'react'
 import { AuthContext } from '../Context/authContext';
 import { BsFillBookmarksFill } from 'react-icons/bs';
+import {WatchedListContext} from '../Context/watchedListContext'
 function Nav({query,setQuery}) {
   const [cookie , setCookie , removeCookie] = useCookies(['accestoken'])
   const navigate = useNavigate()
+  const {dispatchl} = useContext(WatchedListContext)
  const {user,dispatch} = useContext(AuthContext)
   const writeQuery = (e) => {
     setQuery(e.target.value)
@@ -22,14 +24,15 @@ function Nav({query,setQuery}) {
     navigate('/auth')
   }
   const navigateToWatchList = () => {
-    setQuery('')
-    navigate('/watchList')
+    setQuery('');
+    navigate('/watchList');
   }
   
   const Logout = () => {
     dispatch({type:'LOGOUT'});
     removeCookie('accestoken');
     navigate('/');
+    dispatchl({type:"DELETE_ALL_WATCHED_LIST"});
   }
   return (
     <div className="bg_color flex  justify-center items-center overflow-hidden header_height p-2 sm:p-0">

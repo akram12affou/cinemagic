@@ -100,7 +100,7 @@ function MovieDetails() {
                 </div>
              </div> 
     </div>
-    <Cast id={id} personNumber={personNumber} setPersonNumber={setPersonNumber}/>
+     <Cast id={id} personNumber={personNumber} setPersonNumber={setPersonNumber}/>
      <Images id={id} />
      <Recomendation id={id} />
     </>

@@ -10,11 +10,9 @@ import "toastify-js/src/toastify.css"
 import { useContext } from 'react';
 import { WatchedListContext } from '../Context/watchedListContext';
 function MovieCart({movie , setQuery}) {
-  const {dispatch , watchedList} = useContext(WatchedListContext)
-
+    const {dispatchl , watchedList} = useContext(WatchedListContext)
     const navigate = useNavigate();
     const [cookie ,_] =useCookies(['accestoken']);
-
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg-gray-500" : " bg-lime-500";
 
@@ -26,7 +24,7 @@ function MovieCart({movie , setQuery}) {
     
     const addToFavorite = () => {
     if(cookie.accestoken){
-      dispatch({type:'ADD_TO_WATCHEDLIST' , payload:{
+      dispatchl({type:'ADD_TO_WATCHEDLIST' , payload:{
         title,poster_path,vote_average, id
         }})
          axios.post('http://localhost:8888/movie/add',{
@@ -42,7 +40,7 @@ function MovieCart({movie , setQuery}) {
           text: "login to Add to your watch List",
           className: "info",
           style: {
-            background: "linear-gradient(to right, #ff8888, #454545)",
+            background: "linear-gradient(to right, #1f1f1f, #141414)",
           },
           duration: 3000,
           offset: {
@@ -59,25 +57,29 @@ function MovieCart({movie , setQuery}) {
   }
 
   const removeFromFavorite = (movie) => {
+    console.log('h')
+  dispatchl({type: 'REMOVE_FROM_WATCHEDLIST', payload:movie.id})
      axios.delete(`http://localhost:8888/movie/remove/${movie.id}` , {headers: { token : cookie?.accestoken }}
      ).then(res => {
-      console.log(res.data)
+      console.log(res.data);
      })
   }
+
  const InFavorite = (id) => {
   let exist = false
-  for(let i =0 ; watchedList.length > i ; i++){
+  for(let i =0 ; watchedList?.length > i ; i++){
     if(+watchedList[i].id == id ){
       exist = true
     }
   }
    return exist
  }
+
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">
-        <div className='bg_color'>
-           {poster_path ? <Link to={`/movie/${id}`}><img  className='w-10 rounded-md img hover:-translate-y-0.5 transition ease-in-out hover:sepia-[.5] cursor-pointer duration-700' src={`https://image.tmdb.org/t/p/w400/${poster_path}`} alt="" onClick={navigatetoMovie}/></Link>  :
+        <div className='bg_color hover:-translate-y-0.5 transition ease-in-out rounded-md'>
+           {poster_path ? <Link to={`/movie/${id}`}><img  className='w-10 rounded-md img hover:sepia-[.5] cursor-pointer duration-700' src={`https://image.tmdb.org/t/p/w400/${poster_path}`} alt="" onClick={navigatetoMovie}/></Link>  :
           <>
            <div className='flex justify-center items-center w-10 rounded-md img hover:-translate-y-0.5 transition ease-in-out hover:sepia-[.5] cursor-pointer duration-700 bg_color'>
            <SiThemoviedatabase className='text-2xl'/>
