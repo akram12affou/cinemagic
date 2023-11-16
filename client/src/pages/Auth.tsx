@@ -14,7 +14,7 @@ function Auth() {
     const [password , setPassword]= useState('');
     const [email , setEmail]= useState('');
     const [name , setName]= useState('');
-    const {loading , user , error, dispatch} = useContext(AuthContext);
+    const {loading  , error, dispatch} = useContext(AuthContext);
 
     const authFunc = () => {
       dispatch({type:'LOGIN_START'})
@@ -49,10 +49,24 @@ function Auth() {
         })
         }
     };
-
+  const demoLogin = () => {
+    axios.post('http://localhost:8888/auth/login',
+    {
+      password:'User',
+      email:'User'
+    }
+  ).then(res => {
+    setCookie('accestoken', res.data.token);
+    window.localStorage.setItem('cinemagicUser',JSON.stringify(res.data.user));
+     dispatch({type:"LOGIN_SUCCESS",payload : res.data.user})
+    navigate('/');
+  }).catch(err => {
+    dispatch({type:"LOGIN_FAILED",payload :  err.response.data.message})
+  })
+  }
   return (
     <div className='min-h-screen second_bg_color text-white'>
-        <div className='flex rounded-sm flex-col items-center top-16 relative gap-6   mx-auto p-5  '>
+        <div className='flex rounded-sm flex-col items-center top-16 relative gap-6   mx-auto p-5 '>
             <div className=''>discover new movies to watch by analyzing your watched list</div>
             <div className='flex flex-col gap-5'>
             {register &&<div className='flex items-center gap-2'>
@@ -76,12 +90,14 @@ function Auth() {
                 </div>
             </div>
             {error}
-            <button className={`bg-white  text-black p-1 rounded-sm tracking-wide font-semibold hover:tracking-wider trans ${loading && 'opacity-70'}`}   onClick={authFunc}>{!register ? <>Log In {loading && <>...</>} </>:<div className='flex items-center gap-1'>Sign Up <BsFillPersonPlusFill/> {loading && <>...</>}</div> }</button>
+            <button className={`bg-white  text-black p-1 rounded-sm tracking-wide font-semibold hover:scale-105 trans ${loading && 'opacity-70'}`}   onClick={authFunc}>{!register ? <>Log In {loading && <>...</>} </>:<div className='flex items-center gap-1'>Sign Up <BsFillPersonPlusFill/> {loading && <>...</>}</div> }</button>
+          {!register &&   <button className='bg-white text-black p-1 font-semibold rounded-sm trans hover:scale-105' onClick={demoLogin}>demo login</button>}
             <div className='flex gap-1'>
                 {
                     register ? 
                     <>
                       Already a member ? <span className='text-slate-400 cursor-pointer' onClick={() => setRegister(false)}>Log In .</span>  
+                     
                     </>
                     : 
                     <>

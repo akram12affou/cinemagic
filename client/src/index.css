@@ -67,7 +67,11 @@ body, body * {
         width: calc(50px + 10vw);
         height: calc((50px + 10vw)*1.5);
      }
-     .header_height{
-        height: fit-content;
-     }
+  
+  }
+
+@media screen and (max-width: 768px) {
+ .header_height{
+    height: fit-content;
+ }
   }

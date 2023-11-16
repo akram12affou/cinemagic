@@ -33,15 +33,15 @@ function Images({id}) {
         })}
     </div>
     <Modal
-    className='flex justify-center items-center'
+    className='flex justify-center items-center '
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className='flex  justify-center mx-auto sm:w-8/12 w-11/12 outline-none border border-black rounded-sm'>
-          <div className='bg-red-200 w-full'>
-          <img className=' mx-auto' src={`https://image.tmdb.org/t/p/original//${imgModal}`} alt="" />
+        <Box className='flex  justify-center mx-auto sm:w-8/12 w-11/12 outline-none border border-black rounded-sm  '>
+          <div className='bg_rating_bad w-full '>
+          <img className=' mx-auto ' src={`https://image.tmdb.org/t/p/original//${imgModal}`} alt="" />
           </div>
         </Box> 
       </Modal>

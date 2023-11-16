@@ -25,7 +25,7 @@ function PersonDetails() {
               src={`https://image.tmdb.org/t/p/w400//${profile_path}`}
               className="rounded-lg w-full object-contain bg_color"
               width={100}
-              height={200}
+              height={150}
             />
           </div>
           <div className="w-2/3 flex flex-col gap-3">

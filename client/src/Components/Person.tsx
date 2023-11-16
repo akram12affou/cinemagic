@@ -20,15 +20,15 @@ function Person({ person }) {
         />
         </div>
       ) : (
-        <div   className="text-white w-50 h-[16.25rem]  person_img bg_color rounded-md cursor-pointer  hover:-translate-y-0.5 transition ease-in-out  flex justify-center items-center" >
+        <div   className="text-white w-50 h-full h-min-24  person_img bg_color rounded-md cursor-pointer  hover:-translate-y-0.5 transition ease-in-out  flex justify-center items-center" >
            <MdOutlinePersonOutline className='text-3xl'/>
         </div>
       )}
       <div className="flex flex-col">
-        <span className="sm:text-sm cursor-pointer trans text-xs font-semibold text-white hover:tracking-wide"  title={name}  onClick={() => navigate(`/person/${id}`)}>
+        <span className="md:text-sm cursor-pointer trans text-xs font-semibold text-white hover:tracking-wide"  title={name}  onClick={() => navigate(`/person/${id}`)}>
           {name.substring(0, 11)}  {name.length>11 && <>...</>}
         </span>
-        <span className="sm:text-sm text-xs text-white" title={character} onClick={() => navigate(`/person/${id}`)}>
+        <span className="md:text-sm text-xs text-white" title={character} onClick={() => navigate(`/person/${id}`)}>
           {character.substring(0, 11)} {character.length>11 && <>...</>}
         </span>
       </div>
