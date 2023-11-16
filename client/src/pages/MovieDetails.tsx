@@ -10,7 +10,7 @@ function MovieDetails() {
     const [personNumber , setPersonNumber] = useState(true)
     const {data  , loading} = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}&language=en-US`,id)
     const {original_title , overview,poster_path,release_date,budget,runtime,revenue, vote_average} = data
-    const bg_color = vote_average<7 ?  " bg-gray-500" : " bg-lime-500";
+    const bg_color =  vote_average<7 ?  " bg_rating_bad" : " bg_rating_good";
   return (
     <div className='second_bg_color min-h-screen '>
         {
@@ -23,7 +23,7 @@ function MovieDetails() {
             <div className='flex flex-row justify-center mx-auto items-start text-white relative top-5 gap-3'>
         <div className='relative '>
             <img src={`https://image.tmdb.org/t/p/w400/${poster_path}`} className='rounded-md img_details' />
-            <span className={'absolute top-3 rounded-r-lg p-1 text-white' + bg_color} >{vote_average}</span>
+            <span className={'absolute font-semibold tracking-wide top-3 rounded-r-lg p-1 text-white' + bg_color} >{vote_average}</span>
         </div>
         <div className='flex flex-col gap-4 w-1/2'>
             <div>
@@ -60,7 +60,7 @@ function MovieDetails() {
                 <div className='flex flex-wrap gap-2'>
                     {data.genres?.map((e) => {
                 return(
-                    <div className='p-1 bg-lime-600 rounded-md text-sm sm:text-base'>{e.name}</div>
+                    <div className='p-1 bg_rating_good font-semibold tracking-wide rounded-md text-sm sm:text-base'>{e.name}</div>
                 )
                })}  
                 </div>
@@ -94,7 +94,7 @@ function MovieDetails() {
                 <div className='flex flex-wrap  gap-2 mx-auto'>
                     {data.genres?.map((e) => {
                 return(
-                    <div className='p-1 bg-lime-600 rounded-md text-xs sm:text-base font-semibold tracking-wide'>{e.name}</div>
+                    <div className='p-1 bg_rating_good rounded-md text-xs sm:text-base font-semibold tracking-wide'>{e.name}</div>
                 )
                })}  
                 </div>

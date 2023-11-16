@@ -15,7 +15,12 @@ body, body * {
 .img_details{
     width: calc(110px + 15vw);
 }
-
+.bg_rating_good{
+    background-color: #00FF40;
+}
+.bg_rating_bad{
+    background-color: #B0A695;
+}
 
 .actor_img{
     height: 35vw;

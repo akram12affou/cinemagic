@@ -41,7 +41,7 @@ function Nav({query,setQuery}) {
       <div className="flex flex-col gap-2 sm:gap-2 sm:flex-row sm:w-9/12 w-10/12 justify-between sm:items-center items-start">
         <div className="font-bold text-white tracking-wider text-2xl cursor-pointer" onClick={navigateToHome}>CINEMAGIC</div>
         <div className="flex align-items gap-4">
-          <input type="text" placeholder="search a movie ..." value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-1/2" />
+          <input type="text" placeholder="search a movie ..." value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-80" />
           {cookie?.accestoken ?  
                 <div className='flex items-center gap-4'>
                 <div className='flex items-center text-white  gap-3 '>

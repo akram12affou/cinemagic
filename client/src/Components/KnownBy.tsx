@@ -8,7 +8,7 @@ function KnownBy({id}) {
    {!loading  && 
        <div className="flex flex-col gap-2 mt-8">
           <div className='sm:w-8/12 w-9/12  flex  mx-auto'>
-       <h2 className='font-semibold sm:text-2xl text-xl underline decoration-1 '>
+       <h2 className='font-semibold sm:text-2xl text-xl decoration-1 '>
         Known By
       </h2> 
       <div></div>
