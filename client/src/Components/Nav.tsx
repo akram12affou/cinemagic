@@ -4,6 +4,8 @@ import { BiUserCircle } from 'react-icons/Bi';
 import {useContext} from 'react'
 import { AuthContext } from '../Context/authContext';
 import { BsFillBookmarksFill } from 'react-icons/bs';
+import { TbLogout } from "react-icons/tb";
+
 import {WatchedListContext} from '../Context/watchedListContext'
 function Nav({query,setQuery}) {
   const [cookie , setCookie , removeCookie] = useCookies(['accestoken'])
@@ -41,7 +43,7 @@ function Nav({query,setQuery}) {
         <div className="flex align-items gap-4">
           <input type="text" placeholder="search a movie ..." value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-1/2" />
           {cookie?.accestoken ?  
-                <div className='sm:flex items-center gap-4'>
+                <div className='flex items-center gap-4'>
                 <div className='flex items-center text-white  gap-3 '>
                   <div className=' border border-slate-200 flex  bg-white text-black items-center gap-2 p-1 rounded-md'>
                      <span>
@@ -55,12 +57,11 @@ function Nav({query,setQuery}) {
                   <button className='uppercase font-semibold tracking-wide' onClick={navigateToWatchList}><BsFillBookmarksFill className="text-xl"/></button>
                 </div>
                 </div>
-                <div className='flex justify-center'>
-                            <button className="text-white font-semibold uppercase tracking-wider  sm:text-base text-sm flex justify-center" onClick={Logout}>Logout</button>
+                <div className='flex justify-center text-xl items-center'>
+                            <button className="text-white font-semibold uppercase tracking-wider  sm:text-base  flex justify-center text-xl" onClick={Logout}><TbLogout className="text-xl"/></button>
                 </div>
                </div>
            :        
-           
            <button className="text-white font-semibold uppercase tracking-wider  sm:text-base text-sm" onClick={navigateToAuth}>Login</button>
 
           }

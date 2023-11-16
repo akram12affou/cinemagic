@@ -21,9 +21,9 @@ const {data  , loading} = useFetch(`https://api.themoviedb.org/3/person/${id}/im
                  {loading && <><LoadingComp/></>}
                 {data?.profiles?.map((person) => {
                     return(
-                        <div className='rounded-lg  w-1/4  sm:w-1/6 overflow-hidden second_bg_color'>
-                            <img className='rounded-lg w-full cursor-pointer hover:scale-105 hover:rotate-1 overflow-hidden trans second_bg_color' width={100}
-                height={100} onClick={() => handleOpen(person?.file_path)} src={`https://image.tmdb.org/t/p/w185/${person.file_path}`} alt="" />
+                        <div className='rounded-lg  w-1/4  sm:w-1/6 overflow-hidden bg_color'>
+                            <img className='rounded-lg w-full cursor-pointer hover:scale-105 hover:rotate-1 overflow-hidden trans bg_color' width={185}
+                          height={260} onClick={() => handleOpen(person?.file_path)} src={`https://image.tmdb.org/t/p/w185/${person.file_path}`} alt="" />
                         </div>
                     )
                 })}

@@ -31,7 +31,7 @@ function MovieCart({movie , setQuery}) {
          title,poster_path,vote_average, id
          },{headers: { token : cookie?.accestoken }}
          ).then(res => {
-          console.log(res.data);
+          // console.log(res.data);
          });
     }else{
         navigate('/auth');
@@ -57,15 +57,15 @@ function MovieCart({movie , setQuery}) {
   }
 
   const removeFromFavorite = (movie) => {
-    console.log('h')
-  dispatchl({type: 'REMOVE_FROM_WATCHEDLIST', payload:movie.id})
+     dispatchl({type: 'REMOVE_FROM_WATCHEDLIST', payload:movie})
      axios.delete(`http://localhost:8888/movie/remove/${movie.id}` , {headers: { token : cookie?.accestoken }}
      ).then(res => {
       console.log(res.data);
      })
+     console.log(watchedList)
   }
 
- const InFavorite = (id) => {
+const InFavorite = (id) => {
   let exist = false
   for(let i =0 ; watchedList?.length > i ; i++){
     if(+watchedList[i].id == id ){
@@ -78,27 +78,24 @@ function MovieCart({movie , setQuery}) {
   return (
     <div className='flex flex-col items-center gap-1.5'>
         <div className="relative">
-        <div className='bg_color hover:-translate-y-0.5 transition ease-in-out rounded-md'>
-           {poster_path ? <Link to={`/movie/${id}`}><img  className='w-10 rounded-md img hover:sepia-[.5] cursor-pointer duration-700' src={`https://image.tmdb.org/t/p/w400/${poster_path}`} alt="" onClick={navigatetoMovie}/></Link>  :
+        <div className='bg_color hover:-translate-y-0.5 transition ease-in-out rounded-md duration-700'>
+           {poster_path ? <Link to={`/movie/${id}`}><img  className='w-10 rounded-md img hover:sepia-[.5] cursor-pointer duration-1000' src={`https://image.tmdb.org/t/p/w400/${poster_path}`} alt="" onClick={navigatetoMovie}/></Link>  :
           <>
            <div className='flex justify-center items-center w-10 rounded-md img hover:-translate-y-0.5 transition ease-in-out hover:sepia-[.5] cursor-pointer duration-700 bg_color'>
            <SiThemoviedatabase className='text-2xl'/>
            </div>
-          </> }
+          </>}
         </div>
-         
-          
            <span className={"absolute text-white top-2  text-base p-1 rounded-r-lg" + bg_color}>{vote()}</span>
         </div>
         <div className='flex items-center w-full justify-evenly  gap-3'>
-             <span className=' text-white text-sm sm:text-base hover:tracking-wide cursor-pointer trans '>
-                    {title.substring(0,10)}
+               <span className=' text-white text-sm sm:text-sm hover:tracking-wide cursor-pointer trans ' title={title} >
+               <Link to={`/movie/${id}`}>{title.substring(0,13)} {title.length>13 && <>...</>}</Link>
                 </span>
                 <div>
-                
                   {InFavorite(movie.id) ? <FaStar className='text-white text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-xl cursor-pointer active:scale-105'/> }
                 </div>
-        </div>      
+        </div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ import { notFound,errorHandler } from './middleware/errorMiddleware.js';
 
 const PORT = process.env.PORT || 8888;
 const app = express();
-app.use(cors())
+app.use(cors()) 
 app.use(express.json()) 
 dotenv.config();
 app.use('/auth' ,router)  

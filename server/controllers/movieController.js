@@ -1,7 +1,7 @@
 import movieModel from "../models/movieModel.js" 
 
 export const getMovies = async  (req, res) => {
-    const movies = await movieModel.find({userId:req.user})
+    const movies = await movieModel.find({userId:req.user._id})
     res.json(movies);
 };
 
@@ -20,7 +20,6 @@ export const addMovie = async (req, res) => {
 
 export const removeMovie = async (req,res) => {
     const {id} = req.params;
-    res.json({id , userId : req.user._id})
-    await movieModel.findOneAndDelete({id:id ,  userId : req.user._id});
+    await movieModel.findOneAndDelete({id ,  userId : req.user._id});
      
 }

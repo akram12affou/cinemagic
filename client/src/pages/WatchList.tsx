@@ -1,11 +1,23 @@
 
 import MovieCart from '../Components/MovieCart';
-import { useContext } from 'react';
+import axios from 'axios';
+import { useContext,useEffect } from 'react';
 import { WatchedListContext } from '../Context/watchedListContext';
+import { useCookies } from "react-cookie";
 
 function WatchList() {
-  const {dispatch , watchedList} = useContext(WatchedListContext)
-
+  const [cookie , setCookie , removeCookie] = useCookies(['accestoken']);
+  const {dispatchl , watchedList} = useContext(WatchedListContext)
+  useEffect(() => {
+    
+    axios.get('http://localhost:8888/movie' , 
+     {headers: { token : cookie?.accestoken }}
+   ).then(res => {
+     dispatchl({type:'FETCH_WATCHEDLIST' , payload:res.data});
+    }).catch(err => {
+     console.log(err)
+    });
+ },[]);
   return (
     <div className='second_bg_color min-h-screen'>
     <div className='sm:w-10/12 w-11/12 mx-auto'>

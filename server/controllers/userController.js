@@ -32,5 +32,4 @@ export const login = asyncHandler(async (req,res) => {
     }else{
       responce(res,'user don t exist',400)
     }
-    res.json(user);
 })

@@ -10,22 +10,26 @@ function Person({ person }) {
   return (
     <div className="flex flex-col gap-2 ">
       {profile_path ? (
-        <img
-        onClick={navigateToPerson}
-          width={100} height={150}
+        <div className=" overflow-hidden rounded-md">
+           <img
+         onClick={navigateToPerson}
+          width={400} height={150}
           src={`https://image.tmdb.org/t/p/w400/${profile_path}`}
           alt=""
-          className="w-50 person_img rounded-md cursor-pointer  hover:-translate-y-0.5 transition ease-in-out hover:sepia-[.5] bg_color "
+          className="w-50 person_img rounded-md cursor-pointer  hover:rotate-2  hover:scale-105 transition duration-500 ease-in-out  bg_color  "
         />
+        </div>
       ) : (
-          <MdOutlinePersonOutline className="text-white w-50 h-full  person_img bg_color rounded-md cursor-pointer  hover:-translate-y-0.5 transition ease-in-out  flex justify-center items-center" />
+        <div className="text-white w-50 h-full   person_img bg_color rounded-md cursor-pointer  hover:-translate-y-0.5 transition ease-in-out  flex justify-center items-center" >
+           <MdOutlinePersonOutline className='text-3xl'/>
+        </div>
       )}
       <div className="flex flex-col">
-        <span className="sm:text-sm cursor-pointer trans text-xs font-semibold text-white hover:tracking-wide"  onClick={() => navigate(`/person/${id}`)}>
-          {name.substring(0, 16)}
+        <span className="sm:text-sm cursor-pointer trans text-xs font-semibold text-white hover:tracking-wide"  title={name}  onClick={() => navigate(`/person/${id}`)}>
+          {name.substring(0, 11)}  {name.length>11 && <>...</>}
         </span>
-        <span className="sm:text-sm text-xs text-white"  onClick={() => navigate(`/person/${id}`)}>
-          {character.substring(0, 20)}
+        <span className="sm:text-sm text-xs text-white" title={character} onClick={() => navigate(`/person/${id}`)}>
+          {character.substring(0, 11)} {character.length>11 && <>...</>}
         </span>
       </div>
     </div>
