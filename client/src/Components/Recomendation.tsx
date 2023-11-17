@@ -1,4 +1,3 @@
-import React from "react";
 import { useFetch } from "../hooks/useFetch";
 import MovieCart from "./MovieCart";
 function Recomendation({ id }) {

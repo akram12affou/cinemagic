@@ -2,11 +2,10 @@ import {BsFillPersonPlusFill} from 'react-icons/bs';
 import axios from 'axios';
 import  {BiUserCircle} from 'react-icons/Bi';
 import {MdOutlinePassword,MdOutlineAlternateEmail} from 'react-icons/md';
-import { useState,useContext } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../Context/authContext';
-
+import { useAuth } from '../hooks/getAuthContext';
 function Auth() {
     const navigate = useNavigate()
     const [_, setCookie] = useCookies(['accestoken']);
@@ -14,7 +13,7 @@ function Auth() {
     const [password , setPassword]= useState('');
     const [email , setEmail]= useState('');
     const [name , setName]= useState('');
-    const {loading  , error, dispatch} = useContext(AuthContext);
+    const {loading  , error, dispatch} = useAuth();
 
     const authFunc = () => {
       dispatch({type:'LOGIN_START'})

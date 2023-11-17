@@ -2,17 +2,16 @@ import {useNavigate} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { BiUserCircle } from 'react-icons/Bi';
 import {useContext , useState} from 'react'
-import { AuthContext } from '../Context/authContext';
 import { BsFillBookmarksFill } from 'react-icons/bs';
 import { TbLogout } from "react-icons/tb";
-import {WatchedListContext} from '../Context/watchedListContext'
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import { MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-const ITEM_HEIGHT = 48;
+import { useAuth } from '../hooks/getAuthContext';
+import { useWatchedList } from '../hooks/getWatchedListContext';
 function Nav({query,setQuery}) {
+  const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -23,8 +22,8 @@ function Nav({query,setQuery}) {
   };
   const [cookie , setCookie , removeCookie] = useCookies(['accestoken'])
   const navigate = useNavigate()
-  const {dispatchl} = useContext(WatchedListContext)
- const {user,dispatch} = useContext(AuthContext)
+  const {dispatchl} = useWatchedList()
+ const {user,dispatch} = useAuth();
   const writeQuery = (e) => {
     setQuery(e.target.value)
     navigate('/')

@@ -10,6 +10,6 @@ export const verifyUser = asyncHandler(async (req,res,next) =>{
        req.user = await userModel.findById(verifyToken.id);
        next();
     }else{ 
-       responce(res,"you'r not authorized",403)  
+       responce(res,"you'r not authorized",403)   
     }
 });

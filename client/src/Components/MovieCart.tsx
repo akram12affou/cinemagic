@@ -6,12 +6,12 @@ import {Link} from 'react-router-dom'
 import axios from 'axios';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css"
-import { useContext } from 'react';
+
 import { useGetToken } from '../hooks/useGetToken';
-import { WatchedListContext } from '../Context/watchedListContext';
+import {useWatchedList} from '../hooks/getWatchedListContext'
 function MovieCart({movie , setQuery}) {
     const token = useGetToken()
-    const {dispatchl , watchedList} = useContext(WatchedListContext)
+    const {dispatchl , watchedList} = useWatchedList()
     const navigate = useNavigate();
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg_rating_bad" : " bg_rating_good";
@@ -23,7 +23,7 @@ function MovieCart({movie , setQuery}) {
     };
     
     const addToFavorite = () => {
-    if(cookie.accestoken){
+    if(token.headers.token){
       dispatchl({type:'ADD_TO_WATCHEDLIST' , payload:{
         title,poster_path,vote_average, id
         }})
@@ -58,11 +58,10 @@ function MovieCart({movie , setQuery}) {
 
   const removeFromFavorite = (movie) => {
      dispatchl({type: 'REMOVE_FROM_WATCHEDLIST', payload:movie})
-     axios.delete(`http://localhost:8888/movie/remove/${movie.id}` , {headers: { token : cookie?.accestoken }}
+     axios.delete(`http://localhost:8888/movie/remove/${movie.id}` ,token
      ).then(res => {
-      console.log(res.data);
+      // console.log(res.data);
      })
-     console.log(watchedList)
   }
 
 const InFavorite = (id) => {

@@ -1,20 +1,19 @@
-
 import MovieCart from '../Components/MovieCart';
 import axios from 'axios';
-import { useContext,useEffect, useState } from 'react';
-import { WatchedListContext } from '../Context/watchedListContext';
-import { useCookies } from "react-cookie";
+import { useEffect, useState } from 'react';
 import LoadingComp from '../Components/loading/loadingComp';
 import { MdKeyboardReturn } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { useGetToken } from '../hooks/useGetToken';
+import { useWatchedList } from '../hooks/getWatchedListContext';
 function WatchList() {
-  const [loading , setLoading] = useState(false)
-  const [cookie , setCookie , removeCookie] = useCookies(['accestoken']);
-  const {dispatchl , watchedList} = useContext(WatchedListContext)
+  const token = useGetToken();
+  const [loading , setLoading] = useState(false);
+  const {dispatchl , watchedList} = useWatchedList();
   useEffect(() => {
     setLoading(true)
     axios.get('http://localhost:8888/movie' , 
-     {headers: { token : cookie?.accestoken }}
+    token
    ).then(res => {
     setLoading(false)
      dispatchl({type:'FETCH_WATCHEDLIST' , payload:res.data});

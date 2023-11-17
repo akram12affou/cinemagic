@@ -1,6 +1,4 @@
 import { createContext,useReducer } from "react";
-import { useCookies } from "react-cookie";
-
 const initialState : {
   watchedList : any
 } = {
@@ -35,7 +33,6 @@ const WatchedListReducer = (state : any, action: { type: string; payload: any; }
   };
 
 export const WatchedListContextProvider = ({children } : any) => {
- const [cookie , setCookie , removeCookie] = useCookies(['accestoken']);
  const [state , dispatchl] = useReducer(WatchedListReducer,initialState);
 
 
