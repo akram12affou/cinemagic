@@ -2,10 +2,11 @@ import {BsFillPersonPlusFill} from 'react-icons/bs';
 import axios from 'axios';
 import  {BiUserCircle} from 'react-icons/Bi';
 import {MdOutlinePassword,MdOutlineAlternateEmail} from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/getAuthContext';
+import { motion } from 'framer-motion';
 function Auth() {
     const navigate = useNavigate()
     const [_, setCookie] = useCookies(['accestoken']);
@@ -29,6 +30,7 @@ function Auth() {
             window.localStorage.setItem('cinemagicUser',JSON.stringify(res.data.newUser));
             navigate('/');
             dispatch({type:"LOGIN_SUCCESS",payload : res.data.newUser})
+            
           }).catch(err => {
                  dispatch({type:"LOGIN_FAILED",payload : err.message})
           })
@@ -63,12 +65,20 @@ function Auth() {
     dispatch({type:"LOGIN_FAILED",payload :  err.response.data.message})
   })
   }
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+    setName('');
+  },[register])
   return (
     <div className='min-h-screen second_bg_color text-white'>
+       <motion.div  
+          initial={{ scale: 0.9, opacity: 0.4 }}
+          animate={{ scale: 1, opacity: 1 }}>
         <div className='flex rounded-sm flex-col items-center top-16 relative gap-6   mx-auto p-5 '>
-            <div className=''>Log in to unlock your watched list!</div>
+            <div className=''>Log in to unlock your watched list ! &#10024;</div>
             <div className='flex flex-col gap-5'>
-            {register &&<div className='flex items-center gap-2'>
+            {register && <div className='flex items-center gap-2'>
                     <div>
                       <BiUserCircle className='text-xl'/> 
                     </div>
@@ -89,23 +99,22 @@ function Auth() {
                 </div>
             </div>
             {error}
-            <button className={`bg-white  text-black p-1 rounded-sm tracking-wide font-semibold hover:scale-105 trans ${loading && 'opacity-70'}`}   onClick={authFunc}>{!register ? <>Log In {loading && <>...</>} </>:<div className='flex items-center gap-1'>Sign Up <BsFillPersonPlusFill/> {loading && <>...</>}</div> }</button>
-          {!register &&   <button className='bg-white text-black p-1 font-semibold rounded-sm trans hover:scale-105' onClick={demoLogin}>demo login</button>}
+            <button className={`bg-white  text-black p-1 rounded-sm tracking-wide font-semibold hover:scale-105 trans ${loading && 'opacity-70'}`}   onClick={authFunc}>{!register ? <>Log In {loading && <>...</>} </>:<div className='flex items-center gap-1 '>Sign Up <BsFillPersonPlusFill/> {loading && <>...</>}</div> }</button>
+          {!register &&   <button className='bg_color text-white p-1.5 border  rounded-sm trans hover:scale-105' onClick={demoLogin}>demo login</button>}
             <div className='flex gap-1'>
                 {
                     register ? 
                     <>
-                      Already a member ? <span className='text-slate-400 cursor-pointer' onClick={() => setRegister(false)}>Log In .</span>  
-                     
+                      Already a member ? <span className='text-slate-400 cursor-pointer hover:underline' onClick={() => setRegister(false)}>Log In </span>.
                     </>
                     : 
                     <>
-                         Not a member yet ? <span className='text-slate-400 cursor-pointer' onClick={() => setRegister(true)}>Sign Up .</span>  
+                         Not a member yet ? <span className='text-slate-400 cursor-pointer hover:underline' onClick={() => setRegister(true)}>Sign Up </span>.  
                     </>
                 }
             </div>
-            </div>
-       
+          </div>
+        </motion.div>
 
     </div>
   )

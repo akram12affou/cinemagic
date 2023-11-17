@@ -35,7 +35,7 @@ const WatchedListReducer = (state : any, action: { type: string; payload: any; }
 export const WatchedListContextProvider = ({children } : any) => {
  const [state , dispatchl] = useReducer(WatchedListReducer,initialState);
 
-
+    
     const value= {
         watchedList : state.watchedList,
         dispatchl

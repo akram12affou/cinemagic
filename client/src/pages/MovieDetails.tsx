@@ -5,6 +5,7 @@ import LoadingComp from '../Components/loading/loadingComp';
 import Cast from '../Components/Cast';
 import Images from '../Components/Images';
 import Recomendation from '../Components/Recomendation';
+import { motion } from 'framer-motion';
 function MovieDetails() {
     const {id} = useParams()
     const [personNumber , setPersonNumber] = useState(true)
@@ -20,6 +21,10 @@ function MovieDetails() {
              </div>
             : 
             <>
+                <motion.div  
+        initial={{y:22 , opacity:0}}
+        animate={{y: 0,opacity:1}}
+              >
             <div className='flex flex-row justify-center mx-auto items-start text-white relative top-5 gap-3'>
         <div className='relative '>
             <img src={`https://image.tmdb.org/t/p/w400/${poster_path}`} className='rounded-md img_details' />
@@ -94,7 +99,7 @@ function MovieDetails() {
                 <div className='flex flex-wrap  gap-2 mx-auto'>
                     {data.genres?.map((e) => {
                 return(
-                    <div className='p-1 bg_rating_good rounded-md text-xs sm:text-base font-semibold tracking-wide'>{e.name}</div>
+                    <div className='p-1 bg_rating_good rounded-md text-xs sm:text-base font-semibold tracking-wide '>{e.name}</div>
                 )
                })}  
                 </div>
@@ -103,7 +108,9 @@ function MovieDetails() {
      <Cast id={id} personNumber={personNumber} setPersonNumber={setPersonNumber}/>
      <Images id={id} />
      <Recomendation id={id} />
+     </motion.div>
     </>
+    
         } 
     <br /><br />
     </div>

@@ -3,6 +3,7 @@ import Modal from '@mui/material/Modal';
 import { useFetch } from '../hooks/useFetch';
 import {useState} from 'react'
 import LoadingComp from './loading/loadingComp';
+import { motion } from 'framer-motion';
 
 function PersonImageDetails({id}) {
   const [open, setOpen] = useState(false);
@@ -22,8 +23,12 @@ const {data  , loading} = useFetch(`https://api.themoviedb.org/3/person/${id}/im
                 {data?.profiles?.map((person) => {
                     return(
                         <div className='rounded-lg  w-1/4  sm:w-1/6 overflow-hidden bg_color'>
+                                 <motion.div  
+                              initial={{ scale: 0.9, opacity: 0.4 }}
+                              animate={{ scale: 1, opacity: 1 }}>
                             <img className='rounded-lg w-full cursor-pointer hover:scale-105 hover:rotate-1 overflow-hidden trans bg_color' width={185}
                           height={260} onClick={() => handleOpen(person?.file_path)} src={`https://image.tmdb.org/t/p/w185/${person.file_path}`} alt="" />
+                          </motion.div>
                         </div>
                     )
                 })}

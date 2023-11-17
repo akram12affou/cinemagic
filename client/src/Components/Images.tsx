@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { useFetch } from '../hooks/useFetch'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { motion } from 'framer-motion';
 
 function Images({id}) {
   const [open, setOpen] = useState(false);
@@ -11,7 +12,7 @@ function Images({id}) {
      setOpen(true);
   } 
   const handleClose = () => setOpen(false);
-   const {data , loading , error} = useFetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}`,null)
+   const {data } = useFetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}`,null)
   return (
     <>
     {data?.backdrops?.length !== 0 &&
@@ -23,14 +24,21 @@ function Images({id}) {
       <div></div>
     </div>
     <div className='flex flex-wrap gap-x-7 gap-y-6 justify-center'>
+
         {data?.backdrops?.slice(0,9).map((e,i) => {
             return(
+              
             <div  width={200} height={100} className='img-film_backdrop sm:w-1/4 rounded-md   w-8/12 cursor-zoom-in overflow-hidden bg-black' key={i}>
+                <motion.div  
+              initial={{ scale: 0.9, opacity: 0.4 }}
+              animate={{ scale: 1, opacity: 1 }}>
               <img className='hover:scale-105 trans bg-black' onClick={() => handleOpen(e?.file_path)}  src={`https://image.tmdb.org/t/p/w500/${e?.file_path}`} alt="" /> 
-       
+              </motion.div>
              </div>
+            
             )
         })}
+         
     </div>
     <Modal
     className='flex justify-center items-center '

@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { BiUserCircle } from 'react-icons/Bi';
-import {useContext , useState} from 'react'
+import {useState} from 'react'
 import { BsFillBookmarksFill } from 'react-icons/bs';
 import { TbLogout } from "react-icons/tb";
 import IconButton from '@mui/material/IconButton';

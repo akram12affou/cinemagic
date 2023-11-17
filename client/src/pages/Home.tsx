@@ -3,13 +3,19 @@ import Moviefilter from '../Components/Moviefilter'
 import { useFetch } from '../hooks/useFetch'
 import LoadingComp from '../Components/loading/loadingComp';
 import {useState} from 'react'
+import {motion} from 'framer-motion'
 import { useWatchedList } from '../hooks/getWatchedListContext';
 function Home() {
     const {watchedList} = useWatchedList();
     const [alignment, setAlignment] = useState('popular');
     const {data , loading} = useFetch(`https://api.themoviedb.org/3/movie/${alignment}?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}&language=en-US}`,alignment)
   return (
+  
     <div className='second_bg_color min-h-screen'>
+        <motion.div
+    initial={{y:22 , opacity:0}}
+    animate={{y: 0,opacity:1}}
+    >
      <div className='sm:w-10/12 w-11/12 mx-auto'>
         <Moviefilter alignment={alignment} setAlignment={setAlignment} />
         <br />
@@ -33,8 +39,8 @@ function Home() {
         </div>
         <br /><br />
      </div>
+     </motion.div>
     </div>
-   
   )
 }
 

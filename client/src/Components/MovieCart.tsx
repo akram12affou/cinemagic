@@ -9,6 +9,7 @@ import "toastify-js/src/toastify.css"
 
 import { useGetToken } from '../hooks/useGetToken';
 import {useWatchedList} from '../hooks/getWatchedListContext'
+import { motion } from 'framer-motion';
 function MovieCart({movie , setQuery}) {
     const token = useGetToken()
     const {dispatchl , watchedList} = useWatchedList()
@@ -44,8 +45,8 @@ function MovieCart({movie , setQuery}) {
           },
           duration: 3000,
           offset: {
-            x:10,
-            y: 660 
+            x:20,
+            y: 70 
           },
         }).showToast();
     }
@@ -77,22 +78,29 @@ const InFavorite = (id) => {
   return (
     <div className='flex flex-col items-center gap-1 overflow-hidden'>
         <div className="relative">
+        <motion.div  
+          initial={{ scale: 0.9, opacity: 0.4 }}
+          animate={{ scale: 1, opacity: 1 }}>
         <div className='bg_color hover:-translate-y-0.5 transition ease-in-out rounded-md duration-700'>
+        
+
            {poster_path ? <Link to={`/movie/${id}`}><img  className='w-10 rounded-md img hover:sepia-[.5] cursor-pointer duration-700' src={`https://image.tmdb.org/t/p/w400/${poster_path}`} alt="" onClick={navigatetoMovie}/></Link>  :
           <>
            <div className='flex justify-center items-center w-10 rounded-md img hover:-translate-y-0.5 transition ease-in-out hover:sepia-[.5] cursor-pointer duration-700 bg_color'>
            <SiThemoviedatabase className='text-2xl'/>
            </div>
           </>}
+         
         </div>
+        </motion.div>
            <span className={"absolute text-white top-2 font-semibold tracking-wide text-sm p-1 rounded-r-lg md:text-base " + bg_color}>{vote()}</span>
         </div>
         <div className='flex items-center w-full justify-evenly  gap-3'>
-               <span className='text-white text-sm lg:text-base hover:tracking-wide cursor-pointer trans ' title={title} >
+               <span className='text-white text-sm lg:text-base hover:tracking-wide cursor-pointer trans ' title={title}>
                <Link to={`/movie/${id}`}>{title.substring(0,10)} {title.length>10 && <>...</>}</Link>
                 </span>
                 <div>
-                  {InFavorite(movie.id) ? <FaStar className='text-white text-sm lg:text-base cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-base lg:text-xl cursor-pointer active:scale-105'/> }
+                  {InFavorite(movie.id) ? <FaStar className='text-white text-base lg:text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(movie)}/> : <FiStar  onClick={addToFavorite} className='text-white text-base lg:text-xl cursor-pointer active:scale-105'/> }
                 </div>
         </div>
     </div>
