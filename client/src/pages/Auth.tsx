@@ -67,7 +67,7 @@ function Auth() {
   return (
     <div className='min-h-screen second_bg_color text-white'>
         <div className='flex rounded-sm flex-col items-center top-16 relative gap-6   mx-auto p-5 '>
-            <div className=''>discover new movies to watch by analyzing your watched list</div>
+            <div className=''>Log in to unlock your watched list!</div>
             <div className='flex flex-col gap-5'>
             {register &&<div className='flex items-center gap-2'>
                     <div>

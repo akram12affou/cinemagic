@@ -49,9 +49,9 @@ body, body * {
     height: calc((20px+ 10vw)*1.5);
 }
 .form_width{
-    width: 60vw;
-    max-width: 600px;
-    min-width: 300px;
+    width: 55vw;
+    max-width: 550px;
+    min-width: 250px;
 }
 
 

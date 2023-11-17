@@ -4,16 +4,15 @@ import {useNavigate} from 'react-router-dom';
 import {SiThemoviedatabase} from 'react-icons/si'
 import {Link} from 'react-router-dom'
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css"
 import { useContext } from 'react';
+import { useGetToken } from '../hooks/useGetToken';
 import { WatchedListContext } from '../Context/watchedListContext';
 function MovieCart({movie , setQuery}) {
- 
+    const token = useGetToken()
     const {dispatchl , watchedList} = useContext(WatchedListContext)
     const navigate = useNavigate();
-    const [cookie ,_] =useCookies(['accestoken']);
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg_rating_bad" : " bg_rating_good";
 
@@ -30,7 +29,7 @@ function MovieCart({movie , setQuery}) {
         }})
          axios.post('http://localhost:8888/movie/add',{
          title,poster_path,vote_average, id
-         },{headers: { token : cookie?.accestoken }}
+         },token
          ).then(res => {
           // console.log(res.data);
          });
