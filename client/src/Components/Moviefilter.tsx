@@ -6,8 +6,12 @@ function Moviefilter({setAlignment ,alignment }) {
       event: React.MouseEvent<HTMLElement>,
       newAlignment: string,
     ) => {
-      setAlignment(newAlignment);
+      if (newAlignment !== null) {
+            setAlignment(newAlignment);
+          }
     };
+   
+    
   return (
     <div className='flex justify-center'>
         <div className="flex justify-end  sm:w-10/12 w-11/12 mr-0	 relative  top-5 ">
@@ -23,7 +27,6 @@ function Moviefilter({setAlignment ,alignment }) {
       <ToggleButton style={{ color: 'white' ,padding:'10px' ,fontSize:'13px',fontWeight:'bold'}} value="top_rated" color='primary'>Top rated</ToggleButton>
       <ToggleButton style={{ color: 'white',borderLeft:'2px solid white',padding:'10px',fontSize:'13px',fontWeight:'bold'  }} value="upcoming" color='primary'>Up Coming</ToggleButton>
     </ToggleButtonGroup>
-       
     </div>
     </div>
   

@@ -10,6 +10,7 @@ import { MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useAuth } from '../hooks/getAuthContext';
 import { useWatchedList } from '../hooks/getWatchedListContext';
+import { FaSearch } from "react-icons/fa"
 function Nav({query,setQuery}) {
   const ITEM_HEIGHT = 48;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -54,7 +55,10 @@ function Nav({query,setQuery}) {
       <div className="flex flex-col gap-2 md:gap-2 md:flex-row md:w-9/12 w-10/12 justify-between md:items-center items-start">
         <div className="font-bold text-white tracking-wider text-2xl cursor-pointer" onClick={navigateToHome}>CINEMAGIC</div>
         <div className="flex align-items gap-4">
-          <input type="text" placeholder="search a movie" value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-7/12 text-sm sm:w-64" />
+
+           <input type="text" placeholder={`search a movie 🔎`} value={query} onChange={e => writeQuery(e)} className="p-2 outline-none rounded-sm w-7/12 text-sm sm:w-64 placeholder:font-semibold placeholder:text-gray-400" />
+           
+          
           {cookie?.accestoken ?  
           <> <div className='flex items-center gap-4'>
                 <div className='flex items-center text-white  gap-3 '>

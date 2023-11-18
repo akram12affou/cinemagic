@@ -1,5 +1,5 @@
 import {FiStar} from 'react-icons/fi';
-import {FaStar} from 'react-icons/fa'
+import {FaStar} from 'react-icons/fa';
 import {useNavigate} from 'react-router-dom';
 import {SiThemoviedatabase} from 'react-icons/si'
 import {Link} from 'react-router-dom'

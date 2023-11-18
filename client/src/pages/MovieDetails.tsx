@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import {useParams} from 'react-router-dom'
+import {FiStar} from 'react-icons/fi';
+import {FaStar} from 'react-icons/fa';
 import { useFetch } from '../hooks/useFetch'
 import LoadingComp from '../Components/loading/loadingComp';
 import Cast from '../Components/Cast';
 import Images from '../Components/Images';
 import Recomendation from '../Components/Recomendation';
 import { motion } from 'framer-motion';
+import { useWatchedList } from '../hooks/getWatchedListContext';
 function MovieDetails() {
-    const {id} = useParams()
-    const [personNumber , setPersonNumber] = useState(true)
+    const {watchedList , dispatchl} = useWatchedList();
+    const {id} = useParams();
+    const [personNumber , setPersonNumber] = useState(true);
     const {data  , loading} = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}&language=en-US`,id)
     const {original_title , overview,poster_path,release_date,budget,runtime,revenue, vote_average} = data
     const bg_color =  vote_average<7 ?  " bg_rating_bad" : " bg_rating_good";
-  return (
+    const existInWatchedList = () => {
+        
+    }
+    return (
     <div className='second_bg_color min-h-screen '>
         {
             loading ? 
@@ -33,7 +40,14 @@ function MovieDetails() {
         <div className='flex flex-col gap-4 w-1/2'>
             <div>
               title:
-            <h2 className='font-semibold text-xl tracking-wide'>{original_title}</h2>  
+            <h2 className='font-semibold text-xl tracking-wide flex justify-between'>
+               <div>
+               {original_title}
+                </div> 
+                <div className='hover:cursor-pointer'>
+                  <FaStar/>
+                </div>
+                </h2>  
             </div>
             <div className='flex flex-col '>
               overflow:

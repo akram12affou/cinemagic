@@ -44,11 +44,11 @@ function Auth() {
           setCookie('accestoken', res.data.token);
           window.localStorage.setItem('cinemagicUser',JSON.stringify(res.data.user));
            dispatch({type:"LOGIN_SUCCESS",payload : res.data.user})
-          navigate('/');
+          navigate('/'); 
         }).catch(err => {
           dispatch({type:"LOGIN_FAILED",payload :  err.response.data.message})
         })
-        }
+        } 
     };
   const demoLogin = () => {
     axios.post('http://localhost:8888/auth/login',

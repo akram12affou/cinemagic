@@ -6,6 +6,7 @@ export const useFetch = (url: string,alignment: unknown) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
+    setData([])
     setLoading(true);
     axios
       .get(url)
