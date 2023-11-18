@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const useFetch = (url: string,alignment: unknown) => {
-  const [data, setData] = useState([]);
+export const useFetch = (url: string, alignment: unknown) => {
+  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
-    setData([])
+    setData([]);
     setLoading(true);
     axios
       .get(url)
@@ -18,8 +18,6 @@ export const useFetch = (url: string,alignment: unknown) => {
         setLoading(false);
         setError(err);
       });
-
-   
   }, [alignment]);
   return { data, loading, error };
 };

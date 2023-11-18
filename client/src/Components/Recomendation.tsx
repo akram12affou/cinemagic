@@ -1,6 +1,6 @@
 import { useFetch } from "../hooks/useFetch";
 import MovieCart from "./MovieCart";
-function Recomendation({ id }) {
+function Recomendation({ id }: any) {
   const { data } = useFetch(
     `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${
       import.meta.env.VITE_REACT_APP_TMDB_KEY
@@ -19,7 +19,7 @@ function Recomendation({ id }) {
           </div>
           <div className="sm:w-10/12 w-11/12 mx-auto">
             <div className="flex flex-wrap gap-x-7 gap-y-10 justify-center">
-              {data.results?.map((movie) => {
+              {data.results?.map((movie: any) => {
                 return <MovieCart movie={movie} />;
               })}
             </div>
