@@ -5,20 +5,59 @@ import {FaStar} from 'react-icons/fa';
 import { useFetch } from '../hooks/useFetch'
 import LoadingComp from '../Components/loading/loadingComp';
 import Cast from '../Components/Cast';
+import axios from 'axios';
+import Toastify from 'toastify-js';
+import { useGetToken } from '../hooks/useGetToken';
 import Images from '../Components/Images';
+import { useWatchedList } from '../hooks/getWatchedListContext';
 import Recomendation from '../Components/Recomendation';
 import { motion } from 'framer-motion';
-import { useWatchedList } from '../hooks/getWatchedListContext';
+import { InFavorite } from '../hooks/existInWatchedList';
+import { useNavigate } from 'react-router-dom';
 function MovieDetails() {
-    const {watchedList , dispatchl} = useWatchedList();
+    const token = useGetToken();
+    const navigate = useNavigate();
+    const {dispatchl} = useWatchedList();
     const {id} = useParams();
     const [personNumber , setPersonNumber] = useState(true);
     const {data  , loading} = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_REACT_APP_TMDB_KEY}&language=en-US`,id)
     const {original_title , overview,poster_path,release_date,budget,runtime,revenue, vote_average} = data
     const bg_color =  vote_average<7 ?  " bg_rating_bad" : " bg_rating_good";
-    const existInWatchedList = () => {
-        
-    }
+    const removeFromFavorite = (movie) => {
+        dispatchl({type: 'REMOVE_FROM_WATCHEDLIST', payload:movie})
+        axios.delete(`http://localhost:8888/movie/remove/${movie.id}` ,token
+        ).then(res => {
+         // console.log(res.data);
+        })
+     }
+     const addToFavorite = () => {
+        if(token.headers.token){
+          dispatchl({type:'ADD_TO_WATCHEDLIST' , payload:{
+            title : original_title,poster_path,vote_average, id
+            }})
+             axios.post('http://localhost:8888/movie/add',{
+             title : original_title,poster_path,vote_average, id
+             },token
+             ).then(res => {
+              // console.log(res.data);
+             });
+        }else{
+            navigate('/auth');
+            scrollTo(0,0);
+            Toastify({
+              text: "login to Add to your watch List",
+              className: "info",
+              style: {
+                background: "linear-gradient(to right, #1f1f1f, #141414)",
+              },
+              duration: 2000,
+              offset: {
+                x:20,
+                y: 70 
+              },
+            }).showToast();
+        }
+      }
     return (
     <div className='second_bg_color min-h-screen '>
         {
@@ -45,7 +84,7 @@ function MovieDetails() {
                {original_title}
                 </div> 
                 <div className='hover:cursor-pointer'>
-                  <FaStar/>
+                {InFavorite(id) ? <FaStar className='text-white text-base lg:text-xl cursor-pointer active:scale-105' onClick={() => removeFromFavorite(data)}/> : <FiStar  onClick={addToFavorite} className='text-white text-base lg:text-xl cursor-pointer active:scale-105'/> }
                 </div>
                 </h2>  
             </div>

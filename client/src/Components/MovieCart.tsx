@@ -6,13 +6,13 @@ import {Link} from 'react-router-dom'
 import axios from 'axios';
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css"
-
+import { InFavorite } from '../hooks/existInWatchedList';
 import { useGetToken } from '../hooks/useGetToken';
 import {useWatchedList} from '../hooks/getWatchedListContext'
 import { motion } from 'framer-motion';
 function MovieCart({movie , setQuery}) {
-    const token = useGetToken()
-    const {dispatchl , watchedList} = useWatchedList()
+    const token = useGetToken();
+    const {dispatchl} = useWatchedList();
     const navigate = useNavigate();
     const {id,title,poster_path,vote_average} =movie;
     const bg_color =  vote_average<7 ?  " bg_rating_bad" : " bg_rating_good";
@@ -43,7 +43,7 @@ function MovieCart({movie , setQuery}) {
           style: {
             background: "linear-gradient(to right, #1f1f1f, #141414)",
           },
-          duration: 3000,
+          duration: 2000,
           offset: {
             x:20,
             y: 70 
@@ -65,15 +65,7 @@ function MovieCart({movie , setQuery}) {
      })
   }
 
-const InFavorite = (id) => {
-  let exist = false
-  for(let i =0 ; watchedList?.length > i ; i++){
-    if(+watchedList[i].id == id ){
-      exist = true
-    }
-  }
-   return exist
- }
+
 
   return (
     <div className='flex flex-col items-center gap-1 overflow-hidden'>
