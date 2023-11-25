@@ -37,7 +37,7 @@ function PersonImageDetails({ id }: any) {
                 animate={{ scale: 1, opacity: 1 }}
               >
                 <img
-                  className="rounded-lg w-full cursor-pointer hover:scale-105 hover:rotate-1 overflow-hidden trans bg_color"
+                  className="rounded-lg w-full cursor-zoom-in hover:scale-105 hover:rotate-1 overflow-hidden trans bg_color"
                   width={185}
                   height={260}
                   onClick={() => handleOpen(person?.file_path)}

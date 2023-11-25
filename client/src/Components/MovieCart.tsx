@@ -132,6 +132,7 @@ function MovieCart({ movie, setQuery }: any) {
             />
           ) : (
             <FiStar
+              title="add to your watch List"
               onClick={addToFavorite}
               className="text-white text-base lg:text-xl cursor-pointer active:scale-105"
             />

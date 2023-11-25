@@ -26,10 +26,28 @@ function MovieDetails() {
   const { dispatchl } = useWatchedList();
   const { id } = useParams();
   const [personNumber, setPersonNumber] = useState<boolean>(true);
-  const { data, loading } = useFetch(
+  const { data } = useFetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${
       import.meta.env.VITE_REACT_APP_TMDB_KEY
     }&language=en-US`,
+    id
+  );
+  const { data :data2 } = useFetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${
+      import.meta.env.VITE_REACT_APP_TMDB_KEY
+    }&language=en-US`,
+    id
+  );
+  const { data : data3 ,loading } = useFetch(
+    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${
+      import.meta.env.VITE_REACT_APP_TMDB_KEY
+    }`,
+    id
+  );
+  const { data :data4 } = useFetch(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${
+      import.meta.env.VITE_REACT_APP_TMDB_KEY
+    }&language=en-US&page=${1}`,
     id
   );
   const {
@@ -93,6 +111,7 @@ function MovieDetails() {
       }).showToast();
     }
   };
+  
   return (
     <div className="second_bg_color min-h-screen ">
       {loading ? (
@@ -107,6 +126,7 @@ function MovieDetails() {
           >
             <div className="flex flex-row justify-center mx-auto items-start text-white relative top-5 gap-3">
               <div className="relative ">
+                
                 <img
                   src={`https://image.tmdb.org/t/p/w400/${poster_path}`}
                   className="rounded-md img_details"
@@ -133,6 +153,7 @@ function MovieDetails() {
                         />
                       ) : (
                         <FiStar
+                          title="add to your watch List"
                           onClick={addToFavorite}
                           className="text-white text-base lg:text-xl cursor-pointer active:scale-105"
                         />
@@ -239,12 +260,12 @@ function MovieDetails() {
               </div>
             </div>
             <Cast
-              id={id}
+              data2={data2}
               personNumber={personNumber}
               setPersonNumber={setPersonNumber}
             />
-            <Images id={id} />
-            <Recomendation id={id} />
+            <Images id={id} data3={data3} />
+            <Recomendation id={id} data4={data4} />
           </motion.div>
         </>
       )}

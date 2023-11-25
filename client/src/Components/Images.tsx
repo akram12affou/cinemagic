@@ -1,10 +1,10 @@
 import { Key, useState } from "react";
-import { useFetch } from "../hooks/useFetch";
+
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { motion } from "framer-motion";
 
-function Images({ id }: any) {
+function Images({ data3 }: any) {
   const [open, setOpen] = useState<boolean>(false);
   const [imgModal, setImgModal] = useState<string>("");
   const handleOpen = (path: string) => {
@@ -12,15 +12,10 @@ function Images({ id }: any) {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  const { data } = useFetch(
-    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${
-      import.meta.env.VITE_REACT_APP_TMDB_KEY
-    }`,
-    null
-  );
+
   return (
     <>
-      {data?.backdrops?.length !== 0 && (
+      {data3?.backdrops?.length !== 0 && (
         <div className="flex flex-col mx-auto justify-between text-white mt-8  gap-3 ">
           <div className="sm:w-8/12 w-9/12  flex  mx-auto">
             <h2 className="font-semibold sm:text-2xl text-xl decoration-1 ">
@@ -29,7 +24,7 @@ function Images({ id }: any) {
             <div></div>
           </div>
           <div className="flex flex-wrap gap-x-7 gap-y-6 justify-center">
-            {data?.backdrops
+            {data3?.backdrops
               ?.slice(0, 9)
               .map((e: { file_path: string }, i: Key | null | undefined) => {
                 return (
@@ -43,7 +38,7 @@ function Images({ id }: any) {
                       animate={{ scale: 1, opacity: 1 }}
                     >
                       <img
-                        className="hover:scale-105 trans bg-black"
+                        className="hover:scale-105 trans bg-gray-400"
                         onClick={() => handleOpen(e?.file_path)}
                         src={`https://image.tmdb.org/t/p/w500/${e?.file_path}`}
                         alt=""

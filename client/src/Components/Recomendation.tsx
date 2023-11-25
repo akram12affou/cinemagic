@@ -1,15 +1,10 @@
-import { useFetch } from "../hooks/useFetch";
+
 import MovieCart from "./MovieCart";
-function Recomendation({ id }: any) {
-  const { data } = useFetch(
-    `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${
-      import.meta.env.VITE_REACT_APP_TMDB_KEY
-    }&language=en-US&page=${1}`,
-    null
-  );
+function Recomendation({ data4 }: any) {
+
   return (
     <>
-      {data?.results?.length !== 0 && (
+      {data4?.results?.length !== 0 && (
         <div className="flex flex-col mx-auto justify-between text-white mt-8  gap-3 ">
           <div className="sm:w-8/12 w-9/12 flex mx-auto ">
             <h2 className="font-semibold sm:text-2xl text-xl  decoration-1 text-white">
@@ -19,7 +14,7 @@ function Recomendation({ id }: any) {
           </div>
           <div className="sm:w-10/12 w-11/12 mx-auto">
             <div className="flex flex-wrap gap-x-7 gap-y-10 justify-center">
-              {data.results?.map((movie: any) => {
+              {data4.results?.map((movie: any) => {
                 return <MovieCart movie={movie} />;
               })}
             </div>

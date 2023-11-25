@@ -19,5 +19,5 @@ export const useFetch = (url: string, alignment: unknown) => {
         setError(err);
       });
   }, [alignment]);
-  return { data, loading, error };
+  return  { data, loading, error };
 };

@@ -27,14 +27,14 @@ function Person({ person }: any) {
       )}
       <div className="flex flex-col">
         <span
-          className="md:text-sm cursor-pointer trans text-xs font-semibold text-white hover:tracking-wide"
+          className="lg:text-sm cursor-pointer trans text-xs font-semibold text-white hover:tracking-wide"
           title={name}
           onClick={() => navigate(`/person/${id}`)}
         >
           {name.substring(0, 11)} {name.length > 11 && <>...</>}
         </span>
         <span
-          className="md:text-sm text-xs text-white"
+          className="lg:text-sm text-xs text-white"
           title={character}
           onClick={() => navigate(`/person/${id}`)}
         >
